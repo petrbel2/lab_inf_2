@@ -1,0 +1,129 @@
+#include <iostream>
+#include <string>
+
+template <typename data_type>
+struct Node {
+    data_type node_data;
+    Node<data_type>* next;
+};
+
+template <typename data_type>
+class LinkedList
+{
+private:
+    Node<data_type>* data;
+    int length;
+
+public:
+    LinkedList(data_type* items, int count) {
+        Node<data_type>* current_next = nullptr;
+        for (int i = count - 1; i >= 0; --i) {
+            current_next = new Node<data_type>{items[i], current_next};
+        }
+        data = current_next;
+        length = count;
+    }
+
+    LinkedList () {
+        length = 0;
+        data = NULL;
+    }
+
+    LinkedList(LinkedList<data_type> &linkedList) {
+        length = linkedList.GetLength();
+        Node<data_type>* current_next = nullptr;
+        for (int i = length - 1; i >= 0; --i) {
+            current_next = new Node<data_type>{linkedList.Get(i), current_next};
+        }
+        data = current_next;
+    }
+
+    data_type GetFirst() {
+        return data->node_data;
+    }
+
+    data_type Get(int index) {
+        Node<data_type>* current = data;
+        for (int i = 0; i < index; i++) {
+            current = current->next;
+        }
+        return current->node_data;
+    }
+
+    data_type GetLast() {
+        Node<data_type>* current = data;
+        for (int i = 0; i < length - 1; i++) {
+            current = current->next;
+        }
+        return current->node_data;
+    }
+
+    int GetLength() {
+        return length;
+    }
+
+    void Prepend(data_type new_data) {
+        Node<data_type>* new_head = nullptr;
+        new_head = new Node<data_type>{new_data, data};
+        data = new_head;
+    }
+
+    void Append(data_type new_data) {
+        Node<data_type>* current = data;
+        Node<data_type>* new_end = nullptr;
+        new_end = new Node<data_type>{new_data, NULL};
+        for (int i = 0; i < length - 1; i++) {
+            current = current->next;
+        }
+        current->next = new_end;
+        length += 1;
+    }
+
+    void InsertAt(data_type new_elem, int position) {
+        Node<data_type>* current = data;
+        Node<data_type>* new_node = nullptr;
+        for (int i = 0; i < position - 1; i++) {
+            current = current->next;
+        }
+        new_node = new Node<data_type>{new_elem, current->next};
+        current->next = new_node;
+        length += 1;
+    }
+
+    LinkedList<data_type> GetSubList(int startIndex, int endIndex) {
+        int new_length = endIndex - startIndex;
+        Node<data_type>* current = data;
+        data_type* new_data = new data_type[new_length];
+        for (int i = 0; i < startIndex; i++) {
+            current = current->next;
+        }
+        for (int i = startIndex; i < endIndex - 1; i++) {
+            new_data[endIndex - i] = current->node_data;
+            current = current->next;
+        }
+        LinkedList<data_type> list(new_data, new_length);
+        delete[] new_data;
+        return list;
+    }
+
+    void Concat(LinkedList<data_type> *list) {
+        int count = length;
+        length = length + list->GetLength();
+        Node<data_type>* current = data;
+        for (int i = 0; i < count; i++) {
+            current = current->next;
+        }
+        current->next = list->data;
+        list->data = nullptr;
+        list->length = 0;
+    }
+
+    ~LinkedList() {
+        Node<data_type>* current = data;
+        while (current != nullptr) {
+            Node<data_type>* to_delete = current;
+            current = current->next;
+            delete to_delete;
+        }
+    }
+};
