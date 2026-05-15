@@ -13,8 +13,8 @@ int main()
     int choice;
     int buffer;
     int buffer2;
-    //test_array();
-    //test_list();
+    test_array();
+    test_list();
     int arr[3] = {1, 2, 3};
     DynamicSequence<int> base_array(arr, 3);
     int arr1[3] = {1, 2, 3};
