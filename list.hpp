@@ -66,6 +66,7 @@ public:
         Node<data_type>* new_head = nullptr;
         new_head = new Node<data_type>{new_data, data};
         data = new_head;
+        length += 1;
     }
 
     void Append(data_type new_data) {
@@ -92,13 +93,17 @@ public:
 
     LinkedList<data_type> GetSubList(int startIndex, int endIndex) {
         int new_length = endIndex - startIndex;
+        if (new_length < 1) {
+            std::cout<<"Incorrect length, full list will be returned\n";
+            new_length = length;
+        }
         Node<data_type>* current = data;
         data_type* new_data = new data_type[new_length];
         for (int i = 0; i < startIndex; i++) {
             current = current->next;
         }
-        for (int i = startIndex; i < endIndex - 1; i++) {
-            new_data[endIndex - i] = current->node_data;
+        for (int i = startIndex; i < endIndex; i++) {
+            new_data[i - startIndex] = current->node_data;
             current = current->next;
         }
         LinkedList<data_type> list(new_data, new_length);
@@ -107,7 +112,7 @@ public:
     }
 
     void Concat(LinkedList<data_type> *list) {
-        int count = length;
+        int count = length - 1;
         length = length + list->GetLength();
         Node<data_type>* current = data;
         for (int i = 0; i < count; i++) {

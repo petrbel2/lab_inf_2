@@ -35,6 +35,10 @@ public:
     }
 
     data_type Get(int index) {
+        if ((index >= array.GetLength()) or (index < 0)) {
+            std::cout<<"Wrong index, first value returned\n";
+            return array.Get(0);
+        }
         return array.Get(index);
     }
 
@@ -52,11 +56,16 @@ public:
     }
 
     void InsertAt(data_type new_elem, int position) {
+        if ((position < 0) or (position > (array.GetLength() - 1))) {
+            std::cout<<"Wrong index\n";
+        }
+        else {
         array.Resize(array.GetLength() + 1);
         for (int i = array.GetLength() - 1; position < i; i--) {
             array.Set(i, array.Get(i - 1));
         }
         array.Set(position, new_elem);
+        }
     }
 
     DynamicSequence<data_type> GetSubList(int startIndex, int endIndex) {
@@ -77,7 +86,7 @@ public:
 
     ListSequence() : list() {}
 
-    ListSequence(ListSequence <data_type> & old_list) : list(old_list->list) {}
+    ListSequence(ListSequence <data_type> & old_list) : list(old_list.list) {}
 
     int GetLength() {
         return list.GetLength();
@@ -88,6 +97,10 @@ public:
     }
 
     data_type Get(int index) {
+        if ((index >= list.GetLength()) or (index < 0)) {
+            std::cout<<"Wrong index, first value returned\n";
+            return list.GetFirst();
+        }
         return list.Get(index);
     }
 
@@ -103,14 +116,19 @@ public:
         list.Prepend(new_elem);
     }
 
-    void InsertAt(data_type new_elem, int postion) {
-        list.InsertAt(new_elem, postion);
+    void InsertAt(data_type new_elem, int position) {
+        if ((position < 0) or (position > (list.GetLength() - 1))) {
+            std::cout<<"Wrong index\n";
+        }
+        else {
+        list.InsertAt(new_elem, position);
+        }
     }
 
     ListSequence<data_type> GetSubList(int startIndex, int endIndex) {
         ListSequence<data_type> result;
         result.list = list.GetSubList(startIndex, endIndex); 
-        return result;
+        return result;   
     }
 
     void Concat(ListSequence<data_type> *new_list) {
