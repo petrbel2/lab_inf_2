@@ -91,7 +91,7 @@ public:
         length += 1;
     }
 
-    LinkedList<data_type> GetSubList(int startIndex, int endIndex) {
+    data_type* GetSubList(int startIndex, int endIndex) {
         int new_length = endIndex - startIndex;
         if (new_length < 1) {
             std::cout<<"Incorrect length, full list will be returned\n";
@@ -106,9 +106,9 @@ public:
             new_data[i - startIndex] = current->node_data;
             current = current->next;
         }
-        LinkedList<data_type> list(new_data, new_length);
-        delete[] new_data;
-        return list;
+        //LinkedList<data_type> list(new_data, new_length);
+        //delete[] new_data;
+        return new_data;
     }
 
     void Concat(LinkedList<data_type> *list) {

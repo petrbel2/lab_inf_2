@@ -126,8 +126,7 @@ public:
     }
 
     ListSequence<data_type> GetSubList(int startIndex, int endIndex) {
-        ListSequence<data_type> result;
-        result.list = list.GetSubList(startIndex, endIndex); 
+        ListSequence<data_type> result(list.GetSubList(startIndex, endIndex), endIndex - startIndex);
         return result;   
     }
 

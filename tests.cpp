@@ -71,13 +71,6 @@ void test_list() {
     else {
         std::cout<<"Insert failture\n";
     }
-    //ListSequence<int> subList = bro.GetSubList(2, 4);
-    //if (subList.Get(0) == 2 and subList.Get(1) == 9) {
-    //    std::cout<<"GetSubList works correctly\n";
-    //}
-    //else {
-    //    std::cout<<"GetSubList failture\n";
-    //}
     //int arr2[2] = {4, 5};
     //ListSequence bro3(arr2, 2);
     //bro2.Concat(&bro3);

@@ -137,7 +137,7 @@ int main()
                 std::cin>>buffer;
                 std::cout<<"End index: ";
                 std::cin>>buffer2;
-                ListSequence<int> list_result = base_list.GetSubList(buffer, buffer2);
+                ListSequence<int> list_result((base_list.GetSubList(buffer, buffer2)));
                 for (int i = 0; i < list_result.GetLength(); i++) {
                     std::cout<<list_result.Get(i)<<"\n";
                 }
