@@ -74,8 +74,10 @@ void test_list() {
     int arr2[2] = {4, 5};
     ListSequence bro3(arr2, 2);
     bro.Concat(&bro3);
-    for (int i = 0; i < bro.GetLength(); i++) {
-        std::cout<<bro.Get(i)<<"\n";
+    if (bro.GetLast() == 5) {
+        std::cout<<"Concat works correctly\n";
     }
-    std::cout<<"list printed\n";
+    else {
+        std::cout<<"Concat failture\n";
+    }
 }

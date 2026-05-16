@@ -170,7 +170,7 @@ public:
         }
     }
 
-    DynamicSequence Append(data_type new_elem) {
+    DynamicSequence<data_type> Append(data_type new_elem) {
         data_type* copy_data = new data_type[array.GetLength()];
         GetData(array.GetLength(), copy_data);
         DynamicSequence<data_type> result(copy_data, array.GetLength());
@@ -178,7 +178,7 @@ public:
         return result;
     }
 
-    DynamicSequence Prepend(data_type new_elem) {
+    DynamicSequence<data_type> Prepend(data_type new_elem) {
         data_type* copy_data = new data_type[array.GetLength()];
         GetData(array.GetLength(), copy_data);
         DynamicSequence<data_type> result(copy_data, array.GetLength());
@@ -186,7 +186,7 @@ public:
         return result;
     }
 
-    DynamicSequence InsertAt(data_type new_elem, int position) {
+    DynamicSequence<data_type> InsertAt(data_type new_elem, int position) {
         data_type* copy_data = new data_type[array.GetLength()];
         GetData(array.GetLength(), copy_data);
         DynamicSequence<data_type> result(copy_data, array.GetLength());
@@ -216,7 +216,7 @@ public:
 
     void GetData(int length, data_type* massiv) {
         for (int i = 0; i < length; i++) {
-            massiv[i] = array.Get(i);
+            massiv[i] = list.Get(i);
         }
     }
 
@@ -240,7 +240,7 @@ public:
         return list.GetLast();
     }
 
-    ListSequence Append(data_type new_elem) {
+    ListSequence<data_type> Append(data_type new_elem) {
         data_type* copy_data = new data_type[list.GetLength()];
         GetData(list.GetLength(), copy_data);
         ListSequence<data_type> result(copy_data, list.GetLength());
@@ -248,7 +248,7 @@ public:
         return result;
     }
 
-    ListSequence Prepend(data_type new_elem) {
+    ListSequence<data_type> Prepend(data_type new_elem) {
         data_type* copy_data = new data_type[list.GetLength()];
         GetData(list.GetLength(), copy_data);
         ListSequence<data_type> result(copy_data, list.GetLength());
@@ -256,7 +256,7 @@ public:
         return result;
     }
 
-    ListSequence InsertAt(data_type new_elem, int position) {
+    ListSequence<data_type> InsertAt(data_type new_elem, int position) {
         data_type* copy_data = new data_type[list.GetLength()];
         GetData(list.GetLength(), copy_data);
         DynamicSequence<data_type> result(copy_data, list.GetLength());
@@ -269,7 +269,7 @@ public:
         return result;   
     }
 
-    ListSequence Concat(ListSequence<data_type> *new_list) {
+    ListSequence<data_type> Concat(ListSequence<data_type> *new_list) {
         data_type* copy_data = new data_type[list.GetLength()];
         GetData(list.GetLength(), copy_data);
         DynamicSequence<data_type> result(copy_data, list.GetLength());
