@@ -15,12 +15,22 @@ int main()
     int buffer2;
     test_array();
     test_list();
-    int arr[3] = {1, 2, 3};
-    DynamicSequence<int> base_array(arr, 3);
-    int arr1[3] = {1, 2, 3};
-    ListSequence base_list(arr1, 3);
-    printf(" [1] Make array(otherwise default array will be used)\n");
-    printf(" [2] Make list(otherwise default list will be used)\n");
+    std::cout<<"Length: ";
+    std::cin>>buffer;
+    int* arr = new int[buffer];
+    for (int i = 0; i < buffer; i++) {
+        std::cout<<"Element: ";
+        std::cin>>arr[i];
+    }
+    DynamicSequence<int> base_array(arr, buffer);
+    std::cout<<"Length: ";
+    std::cin>>buffer;
+    int* arr1 = new int[buffer];
+    for (int i = 0; i < buffer; i++) {
+        std::cout<<"Element: ";
+        std::cin>>arr1[i];
+    }
+    ListSequence base_list(arr1, buffer);
     printf(" [3] Get array length\n");
     printf(" [4] Get array element\n");
     printf(" [5] Prepend array element\n");
@@ -49,19 +59,6 @@ int main()
         }
 
         switch (choice) {
-            case 1:
-                //std::cout<<"Length: ";
-                //std::cin>>buffer;
-                //for (int i = 0; i < base_array.GetLength(); i++) {
-                //    std::cout<<"Element: ";
-                //   std::cin>>buffer2;
-                //    base_array.InsertAt(buffer2, i);
-                //}
-                //clear_input_buffer();
-                break;
-            case 2:
-                //addition(formA, formB);
-                break;
             case 3:
                 std::cout<<base_array.GetLength()<<"\n";
                 break;
@@ -137,22 +134,35 @@ int main()
                 std::cin>>buffer;
                 std::cout<<"End index: ";
                 std::cin>>buffer2;
-                ListSequence<int> list_result((base_list.GetSubList(buffer, buffer2)));
+                ListSequence<int> list_result = base_list.GetSubList(buffer, buffer2);
                 for (int i = 0; i < list_result.GetLength(); i++) {
                     std::cout<<list_result.Get(i)<<"\n";
                 }
                 clear_input_buffer();
                 break;
-            }
+                }
             case 15:
                 std::cout<<base_list.GetFirst()<<"\n";
                 break;
             case 16:
                 std::cout<<base_list.GetLast()<<"\n";
                 break;
-            case 17:
+            case 17: {
+                std::cout<<"Length: ";
+                std::cin>>buffer;
+                int* arr2 = new int[buffer];
+                for (int i = 0; i < buffer; i++) {
+                std::cout<<"Element: ";
+                std::cin>>arr2[i];
+                }
+                ListSequence<int> concat_list(arr2, buffer);
+                base_list.Concat(&concat_list);
+                for (int i = 0; i < base_list.GetLength(); i++) {
+                    std::cout<<base_list.Get(i)<<"\n";
+                }
                 clear_input_buffer();
                 break;
+                }
             default:
                 std::cout<<"Wrong number.\n";
                 break;

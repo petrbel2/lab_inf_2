@@ -71,11 +71,11 @@ void test_list() {
     else {
         std::cout<<"Insert failture\n";
     }
-    //int arr2[2] = {4, 5};
-    //ListSequence bro3(arr2, 2);
-    //bro2.Concat(&bro3);
-    //for (int i = 0; i < bro3.GetLength(); i++) {
-    //    std::cout<<bro3.Get(i)<<"\n";
-    //}
-    std::cout<<"list printed"<<"\n";
+    int arr2[2] = {4, 5};
+    ListSequence bro3(arr2, 2);
+    bro.Concat(&bro3);
+    for (int i = 0; i < bro.GetLength(); i++) {
+        std::cout<<bro.Get(i)<<"\n";
+    }
+    std::cout<<"list printed\n";
 }

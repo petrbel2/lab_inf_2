@@ -106,8 +106,6 @@ public:
             new_data[i - startIndex] = current->node_data;
             current = current->next;
         }
-        //LinkedList<data_type> list(new_data, new_length);
-        //delete[] new_data;
         return new_data;
     }
 
