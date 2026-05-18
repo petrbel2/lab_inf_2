@@ -1,4 +1,5 @@
-#include "sequences.hpp"
+#include "ListSequence.hpp"
+#include "ArraySequence.hpp"
 #include "tests.hpp" 
 #include <stdio.h>
 #include <stdlib.h>

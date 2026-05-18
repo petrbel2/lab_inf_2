@@ -1,4 +1,6 @@
 #include "sequences.hpp"
+#include "ListSequence.hpp"
+#include "ArraySequence.hpp"
 
 void test_array() {
     std::cout<<"Testing array\n";
