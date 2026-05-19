@@ -5,7 +5,8 @@
 #include "list.hpp"
 
 template <typename data_type>
-class ListSequence: public Sequence<data_type>
+class ListSequence
+//: public Sequence<data_type>
 {
 private:
     LinkedList<data_type> list;
@@ -108,6 +109,7 @@ public:
         GetData(list.GetLength(), copy_data);
         ListSequence<data_type> result(copy_data, list.GetLength());
         result.Append(new_elem);
+        delete[] copy_data;
         return result;
     }
 
@@ -116,6 +118,7 @@ public:
         GetData(list.GetLength(), copy_data);
         ListSequence<data_type> result(copy_data, list.GetLength());
         result.Prepend(new_elem);
+        delete[] copy_data;
         return result;
     }
 
@@ -124,6 +127,7 @@ public:
         GetData(list.GetLength(), copy_data);
         ListSequence<data_type> result(copy_data, list.GetLength());
         result.InsertAt(new_elem, position);
+        delete[] copy_data;
         return result;
     }
 

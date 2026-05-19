@@ -23,7 +23,8 @@ int main()
         std::cout<<"Element: ";
         std::cin>>arr[i];
     }
-    DynamicSequence<int> base_array(arr, buffer);
+    MutDynamicSequence<int> base_array(arr, buffer);
+    delete[] arr;
     std::cout<<"Length: ";
     std::cin>>buffer;
     int* arr1 = new int[buffer];
@@ -32,6 +33,7 @@ int main()
         std::cin>>arr1[i];
     }
     ListSequence base_list(arr1, buffer);
+    delete[] arr1;
     printf(" [3] Get array length\n");
     printf(" [4] Get array element\n");
     printf(" [5] Prepend array element\n");
@@ -94,10 +96,10 @@ int main()
                 std::cin>>buffer;
                 std::cout<<"End index: ";
                 std::cin>>buffer2;
-                DynamicSequence<int> array_result = base_array.GetSubList(buffer, buffer2);
-                for (int i = 0; i < array_result.GetLength(); i++) {
-                    std::cout<<array_result.Get(i)<<"\n";
-                }
+                //MutDynamicSequence<int> array_result = base_array.GetSubList(buffer, buffer2);
+                //for (int i = 0; i < array_result.GetLength(); i++) {
+                //    std::cout<<array_result.Get(i)<<"\n";
+                //}
                 clear_input_buffer();
                 break;
             }
@@ -161,6 +163,7 @@ int main()
                 for (int i = 0; i < base_list.GetLength(); i++) {
                     std::cout<<base_list.Get(i)<<"\n";
                 }
+                delete[] arr2;
                 clear_input_buffer();
                 break;
                 }
