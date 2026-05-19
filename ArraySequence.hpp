@@ -11,7 +11,8 @@ private:
     DynamicArray<data_type> array;
 
 public:
-    DynamicSequence(data_type* items, int length) : array(items, length) {}
+    DynamicSequence(data_type* items, int length) : array(items, length) {
+    }
 
     DynamicSequence() : array() {}
 
@@ -76,7 +77,7 @@ template <typename data_type>
 class MutDynamicSequence: public DynamicSequence<data_type>
 {
     public:
-    MutDynamicSequence(data_type* items, int length) {}// : DynamicSequence(items, length) {}
+    MutDynamicSequence(data_type* items, int length) {}// :  DynamicSequence(items, length) {}
 
     MutDynamicSequence() {}// : DynamicSequence() {}
 
