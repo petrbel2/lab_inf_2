@@ -96,10 +96,10 @@ int main()
                 std::cin>>buffer;
                 std::cout<<"End index: ";
                 std::cin>>buffer2;
-                //MutDynamicSequence<int> array_result = base_array.GetSubList(buffer, buffer2);
-                //for (int i = 0; i < array_result.GetLength(); i++) {
-                //    std::cout<<array_result.Get(i)<<"\n";
-                //}
+                MutDynamicSequence<int> array_result = *(static_cast<MutDynamicSequence<int>*>(base_array.GetSubList(buffer, buffer2)));
+                for (int i = 0; i < array_result.GetLength(); i++) {
+                    std::cout<<array_result.Get(i)<<"\n";
+                }
                 clear_input_buffer();
                 break;
             }
@@ -137,7 +137,7 @@ int main()
                 std::cin>>buffer;
                 std::cout<<"End index: ";
                 std::cin>>buffer2;
-                MutListSequence<int> list_result = base_list.GetSubList(buffer, buffer2);
+                MutListSequence<int> list_result = *(static_cast<MutListSequence<int>*>(base_list.GetSubList(buffer, buffer2)));
                 for (int i = 0; i < list_result.GetLength(); i++) {
                     std::cout<<list_result.Get(i)<<"\n";
                 }

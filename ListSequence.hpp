@@ -60,7 +60,7 @@ public:
         return result;
     }
 
-    Sequence<data_type> GetSubList(int startIndex, int endIndex) {
+    Sequence<data_type>* GetSubList(int startIndex, int endIndex) {
         Sequence<data_type> result(list.GetSubList(startIndex, endIndex), endIndex - startIndex);
         return result;   
     }

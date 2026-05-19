@@ -66,7 +66,12 @@ public:
     }
 
     Sequence<data_type>* GetSubList(int startIndex, int endIndex) {
-        DynamicSequence<data_type>*result(array.GetSubArray(startIndex, endIndex), endIndex - startIndex);
+        auto result = static_cast<DynamicSequence<data_type>*>(Instance());
+        result->array.Resize(endIndex);
+        for (int i = startIndex; i < endIndex; i++) {
+            result->array.Set(i - startIndex, array.Get(i));
+        }
+        result->array.Resize(endIndex - startIndex);
         return result;
     }
 };

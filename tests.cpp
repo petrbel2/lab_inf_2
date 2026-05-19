@@ -33,7 +33,7 @@ void test_array() {
     else {
         std::cout<<"Insert failture\n";
     }
-    MutDynamicSequence<int> subArray = bro.GetSubList(2, 4);
+    MutDynamicSequence<int> subArray = *(static_cast<MutDynamicSequence<int>*>(bro.GetSubList(2, 4)));
     if (subArray.Get(0) == 2 and subArray.Get(1) == 9) {
         std::cout<<"GetSubList works correctly\n";
     }
