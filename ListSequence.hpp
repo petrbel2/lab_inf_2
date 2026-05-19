@@ -5,8 +5,7 @@
 #include "list.hpp"
 
 template <typename data_type>
-class ListSequence
-//: public Sequence<data_type>
+class ListSequence: public Sequence<data_type>
 {
 private:
     LinkedList<data_type> list;
@@ -38,111 +37,77 @@ public:
         return list.GetLast();
     }
 
-    void Append(data_type new_elem) {
-        list.Append(new_elem);
+    Sequence<data_type>* Append(data_type new_elem) {
+        auto result = static_cast<ListSequence<data_type>*>(Instance());
+        result->list.Append(new_elem);
+        return result;
     }
 
-    void Prepend(data_type new_elem) {
-        list.Prepend(new_elem);
+    Sequence<data_type>* Prepend(data_type new_elem) {
+        auto result = static_cast<ListSequence<data_type>*>(Instance());
+        result->list.Prepend(new_elem);
+        return result;
     }
 
-    void InsertAt(data_type new_elem, int position) {
+    Sequence<data_type>* InsertAt(data_type new_elem, int position) {
+        auto result = static_cast<ListSequence<data_type>*>(Instance());
         if ((position < 0) or (position > (list.GetLength() - 1))) {
             std::cout<<"Wrong index\n";
         }
         else {
-        list.InsertAt(new_elem, position);
+        result->list.InsertAt(new_elem, position);
         }
+        return result;
     }
 
-    ListSequence<data_type> GetSubList(int startIndex, int endIndex) {
-        ListSequence<data_type> result(list.GetSubList(startIndex, endIndex), endIndex - startIndex);
+    Sequence<data_type> GetSubList(int startIndex, int endIndex) {
+        Sequence<data_type> result(list.GetSubList(startIndex, endIndex), endIndex - startIndex);
         return result;   
     }
 
     void Concat(ListSequence<data_type> *new_list) {
         list.Concat(&(new_list->list));
     }
+
+    virtual Sequence<data_type>* Instance() = 0;
 };
 
 template <typename data_type>
-class ImmutListSequence
+class MutListSequence: public ListSequence<data_type>
 {
-private:
-    LinkedList<data_type> list;
-
 public:
-    ImmutListSequence(data_type* items, int length) : list(items, length) {}
+    MutListSequence(data_type* items, int length) : ListSequence<data_type>(items, length) {}
 
-    ImmutListSequence() : list() {}
+    MutListSequence() : ListSequence<data_type>() {}
 
-    ImmutListSequence(ImmutListSequence<data_type> & old_list) : list(old_list.list) {}
+    MutListSequence(MutListSequence<data_type> & old_list) : ListSequence<data_type>(old_list) {}
 
-    void GetData(int length, data_type* massiv) {
-        for (int i = 0; i < length; i++) {
-            massiv[i] = list.Get(i);
-        }
+    Sequence<data_type>* Instance() {
+        return this;
+    }
+};
+
+template <typename data_type>
+class ImmutListSequence: public ListSequence<data_type>
+{
+public:
+    ImmutListSequence(data_type* items, int length) : ListSequence<data_type>(items, length) {}
+
+    ImmutListSequence() : ListSequence<data_type>() {}
+
+    ImmutListSequence(ImmutListSequence<data_type> & old_list) : ListSequence<data_type>(old_list) {}
+
+    Sequence<data_type>* Instance() {
+        return new ImmutListSequence<data_type>(*this); 
     }
 
-    int GetLength() {
-        return list.GetLength();
-    }
-
-    data_type GetFirst() {
-        return list.GetFirst();
-    }
-
-    data_type Get(int index) {
-        if ((index >= list.GetLength()) or (index < 0)) {
-            std::cout<<"Wrong index, first value returned\n";
-            return list.GetFirst();
-        }
-        return list.Get(index);
-    }
-
-    data_type GetLast() {
-        return list.GetLast();
-    }
-
-    ListSequence<data_type> Append(data_type new_elem) {
-        data_type* copy_data = new data_type[list.GetLength()];
-        GetData(list.GetLength(), copy_data);
-        ListSequence<data_type> result(copy_data, list.GetLength());
-        result.Append(new_elem);
-        delete[] copy_data;
-        return result;
-    }
-
-    ListSequence<data_type> Prepend(data_type new_elem) {
-        data_type* copy_data = new data_type[list.GetLength()];
-        GetData(list.GetLength(), copy_data);
-        ListSequence<data_type> result(copy_data, list.GetLength());
-        result.Prepend(new_elem);
-        delete[] copy_data;
-        return result;
-    }
-
-    ListSequence<data_type> InsertAt(data_type new_elem, int position) {
-        data_type* copy_data = new data_type[list.GetLength()];
-        GetData(list.GetLength(), copy_data);
-        ListSequence<data_type> result(copy_data, list.GetLength());
-        result.InsertAt(new_elem, position);
-        delete[] copy_data;
-        return result;
-    }
-
-    ListSequence<data_type> GetSubList(int startIndex, int endIndex) {
-        ListSequence<data_type> result(list.GetSubList(startIndex, endIndex), endIndex - startIndex);
-        return result;   
-    }
-
-    ListSequence<data_type> Concat(ListSequence<data_type> *new_list) {
-        data_type* copy_data = new data_type[list.GetLength()];
-        GetData(list.GetLength(), copy_data);
-        ListSequence<data_type> result(copy_data, list.GetLength());
-        result.Concat(&(new_list->list));
-        return result;
-    }
+    //ListSequence<data_type> Concat(ListSequence<data_type> *new_list) {
+    //    data_type* copy_data = new data_type[list.GetLength()];
+    //    GetData(list.GetLength(), copy_data);
+    //    ListSequence<data_type> result(copy_data, list.GetLength());
+    //    result.Concat(&(new_list->list));
+    //    return result;
+    //}
 };
 
 #endif

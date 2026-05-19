@@ -65,10 +65,10 @@ public:
         }
     }
 
-    //Sequence<data_type>* GetSubList(int startIndex, int endIndex) {
-    //    auto result = (array.GetSubArray(startIndex, endIndex), endIndex - startIndex);
-    //    return result;
-    //}
+    Sequence<data_type>* GetSubList(int startIndex, int endIndex) {
+        DynamicSequence<data_type>*result(array.GetSubArray(startIndex, endIndex), endIndex - startIndex);
+        return result;
+    }
 };
 
 
@@ -77,11 +77,11 @@ template <typename data_type>
 class MutDynamicSequence: public DynamicSequence<data_type>
 {
     public:
-    MutDynamicSequence(data_type* items, int length) {}// :  DynamicSequence(items, length) {}
+    MutDynamicSequence(data_type* items, int length):  DynamicSequence<data_type>(items, length) {}
 
-    MutDynamicSequence() {}// : DynamicSequence() {}
+    MutDynamicSequence(): DynamicSequence<data_type>() {}
 
-    MutDynamicSequence(MutDynamicSequence <data_type> & old_array) {}// : DynamicSequence(old_array) {}
+    MutDynamicSequence(MutDynamicSequence <data_type> & old_array): DynamicSequence<data_type>(old_array) {}
 
     Sequence<data_type>* Instance() {
         return this;
@@ -91,9 +91,15 @@ class MutDynamicSequence: public DynamicSequence<data_type>
 template <typename data_type>
 class ImmutDynamicSequence: public DynamicSequence<data_type>
 {
+    public:
+    ImmutDynamicSequence(data_type* items, int length):  DynamicSequence<data_type>(items, length) {}
+
+    ImmutDynamicSequence(): DynamicSequence<data_type>() {}
+
+    ImmutDynamicSequence(ImmutDynamicSequence <data_type> & old_array): DynamicSequence<data_type>(old_array) {}
+
     Sequence<data_type>* Instance() {
-        ImmutDynamicSequence<data_type> clone = ImmutDynamicSequence(this);
-        return clone;
+        return new ImmutDynamicSequence<data_type>(*this); 
     }
 };
 

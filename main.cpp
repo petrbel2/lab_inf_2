@@ -32,7 +32,7 @@ int main()
         std::cout<<"Element: ";
         std::cin>>arr1[i];
     }
-    ListSequence base_list(arr1, buffer);
+    MutListSequence<int> base_list(arr1, buffer);
     delete[] arr1;
     printf(" [3] Get array length\n");
     printf(" [4] Get array element\n");
@@ -137,7 +137,7 @@ int main()
                 std::cin>>buffer;
                 std::cout<<"End index: ";
                 std::cin>>buffer2;
-                ListSequence<int> list_result = base_list.GetSubList(buffer, buffer2);
+                MutListSequence<int> list_result = base_list.GetSubList(buffer, buffer2);
                 for (int i = 0; i < list_result.GetLength(); i++) {
                     std::cout<<list_result.Get(i)<<"\n";
                 }
@@ -158,7 +158,7 @@ int main()
                 std::cout<<"Element: ";
                 std::cin>>arr2[i];
                 }
-                ListSequence<int> concat_list(arr2, buffer);
+                MutListSequence<int> concat_list(arr2, buffer);
                 base_list.Concat(&concat_list);
                 for (int i = 0; i < base_list.GetLength(); i++) {
                     std::cout<<base_list.Get(i)<<"\n";

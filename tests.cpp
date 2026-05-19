@@ -33,19 +33,19 @@ void test_array() {
     else {
         std::cout<<"Insert failture\n";
     }
-    //DynamicSequence<int> subArray = bro.GetSubList(2, 4);
-    //if (subArray.Get(0) == 2 and subArray.Get(1) == 9) {
-    //    std::cout<<"GetSubList works correctly\n";
-    //}
-    //else {
-    //    std::cout<<"GetSubList failture\n";
-    //}
+    MutDynamicSequence<int> subArray = bro.GetSubList(2, 4);
+    if (subArray.Get(0) == 2 and subArray.Get(1) == 9) {
+        std::cout<<"GetSubList works correctly\n";
+    }
+    else {
+        std::cout<<"GetSubList failture\n";
+    }
 }
 
 void test_list() {
     std::cout<<"Testing list"<<"\n";
     int arr1[3] = {1, 2, 3};
-    ListSequence bro(arr1, 3);
+    MutListSequence bro(arr1, 3);
     if (bro.GetLength() == 3) {
         std::cout<<"Length returned correctly\n";
     }
@@ -74,7 +74,7 @@ void test_list() {
         std::cout<<"Insert failture\n";
     }
     int arr2[2] = {4, 5};
-    ListSequence bro3(arr2, 2);
+    MutListSequence bro3(arr2, 2);
     bro.Concat(&bro3);
     if (bro.GetLast() == 5) {
         std::cout<<"Concat works correctly\n";
