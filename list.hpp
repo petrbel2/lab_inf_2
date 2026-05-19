@@ -93,22 +93,25 @@ public:
         length += 1;
     }
 
-    data_type* GetSubList(int startIndex, int endIndex) {
-        int new_length = endIndex - startIndex;
-        if (new_length < 1) {
-            std::cout<<"Incorrect length, full list will be returned\n";
-            new_length = length;
-        }
+    void GetSubList(int startIndex, int endIndex) {
         Node<data_type>* current = data;
-        data_type* new_data = new data_type[new_length];
+        Node<data_type>* previous = data;
         for (int i = 0; i < startIndex; i++) {
             current = current->next;
+            delete previous;
+            previous = current;
         }
+        data = current;
+        length = endIndex - startIndex;
         for (int i = startIndex; i < endIndex; i++) {
-            new_data[i - startIndex] = current->node_data;
             current = current->next;
+            previous = current;
         }
-        return new_data;
+        for (int i = endIndex; i < length; i++) {
+            current = current->next;
+            previous = current;
+            delete previous;
+        }
     }
 
     void Concat(LinkedList<data_type> *list) {

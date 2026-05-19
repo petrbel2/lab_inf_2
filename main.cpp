@@ -15,7 +15,7 @@ int main()
     int buffer;
     int buffer2;
     test_array();
-    //test_list();
+    test_list();
     std::cout<<"Length: ";
     std::cin>>buffer;
     int* arr = new int[buffer];

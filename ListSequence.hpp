@@ -61,7 +61,14 @@ public:
     }
 
     Sequence<data_type>* GetSubList(int startIndex, int endIndex) {
-        Sequence<data_type> result(list.GetSubList(startIndex, endIndex), endIndex - startIndex);
+        auto result = static_cast<ListSequence<data_type>*>(Instance());
+        int new_length = endIndex - startIndex;
+        if (new_length < 1) {
+            std::cout<<"Incorrect length, full list will be returned\n";
+            new_length = list.GetLength();
+            return result; 
+        }
+        result->list.GetSubList(startIndex, endIndex);
         return result;   
     }
 
