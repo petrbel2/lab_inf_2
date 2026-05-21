@@ -61,7 +61,7 @@ public:
     }
 
     Sequence<data_type>* GetSubList(int startIndex, int endIndex) {
-        auto result = static_cast<ListSequence<data_type>*>(Instance());
+        auto result = static_cast<ListSequence<data_type>*>(Copy());
         int new_length = endIndex - startIndex;
         if (new_length < 1) {
             std::cout<<"Incorrect length, full list will be returned\n";
@@ -79,6 +79,8 @@ public:
     }
 
     virtual Sequence<data_type>* Instance() = 0;
+
+    virtual Sequence<data_type>* Copy() = 0;
 };
 
 template <typename data_type>
@@ -94,6 +96,10 @@ public:
     Sequence<data_type>* Instance() {
         return this;
     }
+
+    Sequence<data_type>* Copy() {
+        return new MutListSequence<data_type>(*this); 
+    }
 };
 
 template <typename data_type>
@@ -107,6 +113,10 @@ public:
     ImmutListSequence(ImmutListSequence<data_type> & old_list) : ListSequence<data_type>(old_list) {}
 
     Sequence<data_type>* Instance() {
+        return new ImmutListSequence<data_type>(*this); 
+    }
+
+    Sequence<data_type>* Copy() {
         return new ImmutListSequence<data_type>(*this); 
     }
 };
