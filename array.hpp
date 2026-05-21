@@ -9,14 +9,16 @@ class DynamicArray
 private:
     data_type* data;
     int length;
+    int supply;
 
 public:
     DynamicArray (data_type* items, int count) {
-        data = new data_type[count];
+        data = new data_type[count + 5];
         for (int i = 0; i < count; i++) {
             data[i] = items[i];
         }
         length = count;
+        supply = 5;
     }
 
     DynamicArray () {
@@ -45,19 +47,26 @@ public:
     }
 
     void Resize(int new_length) {
-        data_type* new_data = new data_type[new_length];
-        if (length < new_length) {
-            for (int i = 0; i < length; i++) {
-                new_data[i] = data[i];
+        if ((new_length > (length + supply)) or new_length < length) {
+            data_type* new_data = new data_type[new_length + 5];
+            if (length < new_length) {
+                for (int i = 0; i < length; i++) {
+                    new_data[i] = data[i];
+                }
             }
-        }
+            else {
+                for (int i = 0; i < new_length; i++) {
+                    new_data[i] = data[i];
+                }
+            }
+            delete[] data;
+            data = new_data;
+            
+            supply = 5;
+            }
         else {
-            for (int i = 0; i < new_length; i++) {
-                new_data[i] = data[i];
+            supply -= (new_length - length);
             }
-        }
-        delete[] data;
-        data = new_data;
         length = new_length;
     }
 
