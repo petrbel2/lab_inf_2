@@ -80,7 +80,7 @@ public:
         int count = length;
         Resize(GetLength() + new_array->GetLength());
         for (int i = count; i < length; i++) {
-            data[i] = new_array->data[i];
+            data[i] = new_array->data[i - count];
         }
     }
 
