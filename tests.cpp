@@ -39,6 +39,18 @@ void test_array() {
     else {
         std::cout<<"GetSubList failture\n";
     }
+    int arr2[2] = {4, 5};
+    MutDynamicSequence bro3(arr2, 2);
+    bro.Concat(&bro3);
+    for (int i = 0; i < bro.GetLength(); i++) {
+        std::cout<<bro.Get(i)<<"\n";
+    }
+    //if (bro.GetLast() == 5) {
+    //    std::cout<<"Concat works correctly\n";
+    //}
+    //else {
+    //    std::cout<<"Concat failture\n";
+    //}
 }
 
 void test_list() {
