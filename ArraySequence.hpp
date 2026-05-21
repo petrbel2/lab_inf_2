@@ -56,12 +56,12 @@ public:
             return result;
         }
         else {
-        result->array.Resize(array.GetLength() + 1);
-        for (int i = result->array.GetLength() - 1; position < i; i--) {
-            result->array.Set(i, array.Get(i - 1));
-        }
-        result->array.Set(position, new_elem);
-        return result;
+            result->array.Resize(array.GetLength() + 1);
+            for (int i = result->array.GetLength() - 1; position < i; i--) {
+                result->array.Set(i, array.Get(i - 1));
+            }
+            result->array.Set(position, new_elem);
+            return result;
         }
     }
 
@@ -72,6 +72,12 @@ public:
             result->array.Set(i - startIndex, array.Get(i));
         }
         result->array.Resize(endIndex - startIndex);
+        return result;
+    }
+
+    Sequence<data_type>* Concat(Sequence<data_type> *new_array) {
+        auto result = static_cast<DynamicSequence<data_type>*>(Instance());
+        result->array.Concat(&((static_cast<DynamicSequence<data_type>*>(new_array))->array));
         return result;
     }
 };

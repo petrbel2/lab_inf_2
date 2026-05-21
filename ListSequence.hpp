@@ -72,8 +72,10 @@ public:
         return result;   
     }
 
-    void Concat(ListSequence<data_type> *new_list) {
-        list.Concat(&(new_list->list));
+    Sequence<data_type>* Concat(Sequence<data_type> *new_list) {
+        auto result = static_cast<ListSequence<data_type>*>(Instance());
+        result->list.Concat(&((static_cast<ListSequence<data_type>*>(new_list))->list));
+        return result;
     }
 
     virtual Sequence<data_type>* Instance() = 0;
@@ -107,14 +109,6 @@ public:
     Sequence<data_type>* Instance() {
         return new ImmutListSequence<data_type>(*this); 
     }
-
-    //ListSequence<data_type> Concat(ListSequence<data_type> *new_list) {
-    //    data_type* copy_data = new data_type[list.GetLength()];
-    //    GetData(list.GetLength(), copy_data);
-    //    ListSequence<data_type> result(copy_data, list.GetLength());
-    //    result.Concat(&(new_list->list));
-    //    return result;
-    //}
 };
 
 #endif
