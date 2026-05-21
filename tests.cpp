@@ -1,6 +1,6 @@
 #include "sequences.hpp"
 #include "ListSequence.hpp"
-#include "ArraySequence.hpp"
+#include "DynamicSequence.hpp"
 
 void test_array() {
     std::cout<<"Testing array\n";

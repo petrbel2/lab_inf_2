@@ -1,5 +1,5 @@
 #include "ListSequence.hpp"
-#include "ArraySequence.hpp"
+#include "DynamicSequence.hpp"
 #include "tests.hpp" 
 #include <stdio.h>
 #include <stdlib.h>
