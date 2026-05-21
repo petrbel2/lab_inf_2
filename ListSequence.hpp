@@ -1,7 +1,7 @@
 #ifndef LISTSEQUENCE_H 
 #define LISTSEQUENCE_H
 
-#include "sequences.hpp"
+#include "sequence.hpp"
 #include "list.hpp"
 
 template <typename data_type>

@@ -2,7 +2,7 @@
 #define ARRAYSEQUENCE_H
 
 #include "array.hpp"
-#include "sequences.hpp"
+#include "sequence.hpp"
 
 template <typename data_type>
 class DynamicSequence: public Sequence<data_type>

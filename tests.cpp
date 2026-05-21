@@ -1,4 +1,3 @@
-#include "sequences.hpp"
 #include "ListSequence.hpp"
 #include "DynamicSequence.hpp"
 
