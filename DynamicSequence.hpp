@@ -73,9 +73,18 @@ public:
         return result;
     }
 
+    // старый конкат
+    //Sequence<data_type>* Concat(Sequence<data_type> *new_array) {
+    //    auto result = static_cast<DynamicSequence<data_type>*>(Instance());
+    //    result->array.Concat(&((static_cast<DynamicSequence<data_type>*>(new_array))->array));
+    //    return result;
+    //}
+    
     Sequence<data_type>* Concat(Sequence<data_type> *new_array) {
         auto result = static_cast<DynamicSequence<data_type>*>(Instance());
-        result->array.Concat(&((static_cast<DynamicSequence<data_type>*>(new_array))->array));
+        for (int i = 0; i < new_array->GetLength(); i++) {
+            result->Append(new_array->Get(i));
+        }
         return result;
     }
 

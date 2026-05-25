@@ -72,9 +72,17 @@ public:
         return result;   
     }
 
-    Sequence<data_type>* Concat(Sequence<data_type> *new_list) {
+    //Sequence<data_type>* Concat(Sequence<data_type> *new_list) {
+    //    auto result = static_cast<ListSequence<data_type>*>(Instance());
+    //    result->list.Concat(&((static_cast<ListSequence<data_type>*>(new_list))->list));
+    //    return result;
+    //}
+
+    Sequence<data_type>* Concat(Sequence<data_type> *new_array) {
         auto result = static_cast<ListSequence<data_type>*>(Instance());
-        result->list.Concat(&((static_cast<ListSequence<data_type>*>(new_list))->list));
+        for (int i = 0; i < new_array->GetLength(); i++) {
+            result->Append(new_array->Get(i));
+        }
         return result;
     }
 

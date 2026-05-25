@@ -114,17 +114,17 @@ public:
         }
     }
 
-    void Concat(LinkedList<data_type> *list) {
-        int count = length - 1;
-        length = length + list->GetLength();
-        Node<data_type>* current = data;
-        for (int i = 0; i < count; i++) {
-            current = current->next;
-        }
-        current->next = list->data;
-        list->data = nullptr;
-        list->length = 0;
-    }
+    //void Concat(LinkedList<data_type> *list) {
+    //    int count = length - 1;
+    //    length = length + list->GetLength();
+    //    Node<data_type>* current = data;
+    //    for (int i = 0; i < count; i++) {
+    //        current = current->next;
+    //    }
+    //    current->next = list->data;
+    //    list->data = nullptr;
+    //    list->length = 0;
+    //}
 
     ~LinkedList() {
         Node<data_type>* current = data;

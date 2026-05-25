@@ -40,7 +40,7 @@ void test_array() {
         std::cout<<"GetSubList failture\n";
     }
     int arr2[2] = {4, 5};
-    MutDynamicSequence bro3(arr2, 2);
+    MutListSequence bro3(arr2, 2);
     bro.Concat(&bro3);
     if (bro.Get(7) == 5) {
         std::cout<<"Concat works correctly\n";

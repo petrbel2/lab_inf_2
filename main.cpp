@@ -3,6 +3,7 @@
 #include "tests.hpp" 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 static void clear_input_buffer(void) {
     int c;
@@ -11,6 +12,16 @@ static void clear_input_buffer(void) {
 
 int main()
 {
+    {MutDynamicSequence<int> testing_array;
+        testing_array.Append(1);    
+        MutListSequence<int> testing_list;
+        testing_list.Append(2);
+        Sequence<int>* result = testing_list.Concat(&testing_array);
+        assert(result->GetLength() == 2);
+        assert(result->Get(0) == 2);
+        assert(result->Get(1) == 1);
+        assert(false && "We are here\n");
+    }
     int choice;
     int buffer;
     int buffer2;
