@@ -15,9 +15,6 @@ int main()
     int choice;
     int buffer;
     int buffer2;
-    MutListSequence<int> bro;
-    //bro.Prepend(1);
-    std::cout<<bro.GetFirst();
     test_array();
     test_list();
     std::cout<<"Length: ";
