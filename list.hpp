@@ -72,25 +72,35 @@ public:
     }
 
     void Append(data_type new_data) {
-        Node<data_type>* current = data;
         Node<data_type>* new_end = nullptr;
         new_end = new Node<data_type>{new_data, NULL};
-        for (int i = 0; i < length - 1; i++) {
-            current = current->next;
+        if (data == NULL) {
+            data = new_end;
         }
-        current->next = new_end;
+        else {
+            Node<data_type>* current = data;
+            for (int i = 0; i < length - 1; i++) {
+                current = current->next;
+            }
+            current->next = new_end;
+        }
         length += 1;
     }
 
     void InsertAt(data_type new_elem, int position) {
-        Node<data_type>* current = data;
-        Node<data_type>* new_node = nullptr;
-        for (int i = 0; i < position - 1; i++) {
-            current = current->next;
+        if (data == NULL) {
+            this->Append(new_elem);
         }
-        new_node = new Node<data_type>{new_elem, current->next};
-        current->next = new_node;
-        length += 1;
+        else {
+            Node<data_type>* current = data;
+            Node<data_type>* new_node = nullptr;
+            for (int i = 0; i < position - 1; i++) {
+                current = current->next;
+            }
+            new_node = new Node<data_type>{new_elem, current->next};
+            current->next = new_node;
+            length += 1;
+        }
     }
 
     void GetSubList(int startIndex, int endIndex) {

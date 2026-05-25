@@ -22,7 +22,13 @@ public:
     }
 
     data_type GetFirst() {
-        return list.GetFirst();
+        if (this->GetLength() > 0) {
+            return list.GetFirst();
+        }
+        else {
+            std::cout<<"Empty list, zero returned";
+            return 0;
+        }
     }
 
     data_type Get(int index) {
@@ -34,7 +40,13 @@ public:
     }
 
     data_type GetLast() {
-        return list.GetLast();
+        if (this->GetLength() > 0) {
+            return list.GetLast();
+        }
+        else {
+            std::cout<<"Empty list, zero returned";
+            return 0;
+        }
     }
 
     Sequence<data_type>* Append(data_type new_elem) {
@@ -51,7 +63,7 @@ public:
 
     Sequence<data_type>* InsertAt(data_type new_elem, int position) {
         auto result = static_cast<ListSequence<data_type>*>(Instance());
-        if ((position < 0) or (position > (list.GetLength() - 1))) {
+        if ((position < 0) or (position > list.GetLength())) {
             std::cout<<"Wrong index\n";
         }
         else {
